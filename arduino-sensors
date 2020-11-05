@@ -1,0 +1,111 @@
+int oneRight = 2; 
+int ORled = 13; 
+
+int oneLeft = 3;
+int OLled = 12;
+
+int twoRight = 4;
+int TRled = 9;
+
+int twoLeft = 5;
+int TLled = 8;
+
+int pirState = LOW;
+int val = 0;
+
+
+void setup() {
+  pinMode(oneRight, INPUT);
+  pinMode(ORled, OUTPUT);
+
+  pinMode(oneLeft, INPUT);
+  pinMode(ORled, OUTPUT);
+
+  pinMode(twoRight, INPUT);
+  pinMode(TRled, OUTPUT); 
+
+  pinMode(twoLeft, INPUT);
+  pinMode(TLled, OUTPUT);
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  // #1 Right
+  val = digitalRead(oneRight); 
+  if (val == HIGH) { 
+    digitalWrite(ORled, HIGH); 
+    if (pirState == LOW) {
+      Serial.write(HIGH);
+      Serial.print(1);
+      Serial.println("1");
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(ORled, LOW);
+    if (pirState == HIGH) {
+      Serial.write(LOW);
+//      Serial.println("1R Off");
+      pirState = LOW;
+    }
+  }
+
+
+  // #1 Left
+  val = digitalRead(oneLeft);
+  if (val == HIGH) { 
+    digitalWrite(OLled, HIGH);
+    if (pirState == LOW) { 
+      Serial.write(HIGH);
+      Serial.println("2");
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(OLled, LOW);
+    if (pirState == HIGH) {
+      Serial.write(LOW);
+//      Serial.println("1L Off");
+      pirState = LOW;
+    }
+  }
+
+  
+  // #2 Right
+  val = digitalRead(twoRight); 
+  if (val == HIGH) { 
+    digitalWrite(TRled, HIGH); 
+    if (pirState == LOW) { 
+      Serial.write(HIGH);
+      Serial.println("3"); 
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(TRled, LOW); 
+    if (pirState == HIGH) { 
+      Serial.write(LOW);
+//      Serial.println("2R Off");
+      pirState = LOW;
+    }
+  }
+
+
+  // #2 Left
+  val = digitalRead(twoLeft); // read input value
+  if (val == HIGH) { // check if the input is HIGH
+    digitalWrite(TLled, HIGH); // turn LED ON
+    if (pirState == LOW) { // just turned on
+      Serial.write(HIGH);
+      Serial.println("4");
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(TLled, LOW); // turn LED OFF
+    if (pirState == HIGH) { 
+      Serial.write(LOW);
+//      Serial.println("2L Off"); // print on output change, not state
+      pirState = LOW;
+    }
+  }
+  
+}
