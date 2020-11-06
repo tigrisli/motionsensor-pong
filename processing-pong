@@ -67,8 +67,7 @@ void serialEvent(Serial thisPort) {
   // read the serial buffer:
   String inputString = thisPort.readStringUntil('\n');
 
-  if (inputString != null)
-  {
+  if (inputString != null) {
     // trim the carrige return and linefeed from the input string:
     inputString = trim(inputString);
 
@@ -79,59 +78,43 @@ void serialEvent(Serial thisPort) {
     // if we have received all the sensor values, use them:
     if (sensors.length == 4) {
       // scale the sliders' results to the paddles' range:
-      if (sensors[0] > 560 && sensors[1] > 560)
-      {
+      if (sensors[0] > 560 && sensors[1] > 560) {
        moveLeftPaddle = false; 
       }
       
-      if (sensors[2] > 560 && sensors[3] > 560)
-      {
+      if (sensors[2] > 560 && sensors[3] > 560) {
        moveRightPaddle = false; 
       }
       
-      if (moveLeftPaddle)
-      {      
-      if (sensors[1] > sensors[0])
-      {
+      if (moveLeftPaddle) {      
+      if (sensors[1] > sensors[0]) {
         leftPaddle.y += 4;
-      }
-      
-      else
-      {
+      } else {
         leftPaddle.y -= 4;
       }
       }
       
-      if (moveRightPaddle)
-      {
-      if (sensors[3] > sensors[2])
-      {
+      if (moveRightPaddle) {
+      if (sensors[3] > sensors[2]) {
         rightPaddle.y += 4;
-      }
-      
-      else
-      {
+      } else {
         rightPaddle.y -= 4;
       }
       }
       
-      if (leftPaddle.y > 440)
-      {
+      if (leftPaddle.y > 440) {
        leftPaddle.y = 440; 
       }
       
-      if (rightPaddle.y > 440)
-      {
+      if (rightPaddle.y > 440) {
         rightPaddle.y = 440;
       }
       
-      if (leftPaddle.y < 0)
-      {
+      if (leftPaddle.y < 0) {
        leftPaddle.y = 0; 
       }
       
-      if (rightPaddle.y < 0)
-      {
+      if (rightPaddle.y < 0) {
         rightPaddle.y = 0;
       }
       
@@ -152,13 +135,11 @@ void animateBall() {
   }
 
   // if  ball goes off the screen left:
-  if (xPos < 0) 
-  {     
+  if (xPos < 0) {     
     rightScore++;     
     resetBall();   
   }   // if ball goes off the screen right:   
-  if (xPos > width) 
-  {
+  if (xPos > width) {
     leftScore++;
     resetBall();
   }
@@ -175,8 +156,7 @@ void animateBall() {
   rect(xPos, yPos, ballSize, ballSize);
 }
 
-void resetBall()
-{
+void resetBall() {
   // initialize ball in the center of the screen:
   xPos = width/2;
   yPos = height/2;
