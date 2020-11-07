@@ -2,15 +2,15 @@ int oneRight = 2; // choose the input pin (for PIR sensor)
 int ORled = 13; // choose the pin for the LED
 
 int oneLeft = 3;
-int OLled = 12; // choose the pin for the LED
+int OLled = 12; 
 
 int twoRight = 4;
-int TRled = 9; // choose the pin for the LED
+int TRled = 9;
 
 int twoLeft = 5;
-int TLled = 8; // choose the pin for the LED
+int TLled = 8; 
 
-int pirState = LOW; // we start, assuming no motion detected
+int pirState = LOW; // assuming no motion detected
 int val = 0; // variable for reading the pin status
 
 
